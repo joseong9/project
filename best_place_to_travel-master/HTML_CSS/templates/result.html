@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="style.css">
+        <title>문화재</title>
+        
+        <style>
+            @font-face {
+                font-family: "Gugi-Regular.woff";
+                src: url("C:Workspace/project/static/fonts/Gugi-Regular.woff") format("woff");
+            }
+            body, html {
+                height: 100%;
+                margin: 0;
+                font-family: "Gugi-Regular.woff";
+            }
+
+            .bgimg-1 {
+                position: relative;
+                background-position: center;
+                background-repeat: no-repeat;
+                background-size: cover;
+                /* background-image: url(C:Workspace/project/static/image/숭례문야경1.jpg); */
+                background: #000000;
+                background: -webkit-linear-gradient(to right, #000000, #434343);
+                background: linear-gradient(to right, #000000, #434343);
+                height: 100%;
+            }
+            .caption {
+                position: absolute;
+                top: 5%;
+                width: 100%;
+                text-align: center;
+                color: #000;
+            }
+            .caption span.border {
+                background:rgba(0, 0, 0, 0.1);
+                color: white;
+                padding: 1px;
+                font-size: 60px;
+                font-weight: bold;
+                letter-spacing: 10px;
+                display: block;
+                width: 60%;
+                margin: 0 auto;
+                border-radius: 15px 15px 15px 15px;
+            }
+            /* 하단 */
+            .footer {
+                position: absolute;
+                color: white;
+                font-family: "Gugi-Regular.woff";
+                font-weight: bold;
+                text-align: right;
+                font-size: 15px;
+                bottom: 8px;
+                right: 16px;
+                text-shadow: -1px 0 20px black, 0 1px 20px black, 1px 0 20px black, 0 -1px 20px black;
+        
+            }
+            .information{
+                color: white;
+                width: 250px;
+                position: relative;
+                font-size: 50px;
+                left:1000px;
+                top:170px;
+            }
+            .map_info {
+                color: white;
+                width: 250px;
+                position: relative;
+                font-size: 50px;
+                top: 170px; }
+            
+            #map {
+                position: relative;
+                top: 200px;
+                left: 100px;
+            }
+
+            #name{
+                color: white;
+                position: relative;
+                margin-left:45%;
+            }
+
+            #place_info{
+                color: white;
+                position: relative;
+                margin-left:45%;
+                max-width: 40%;
+            }
+        </style>
+    </head>
+
+    <body>
+        <div class="bgimg-1">
+            <div class="caption">
+                <span class="border">검색 결과 화면</span>
+            </div>
+
+            <span class="information">문화재 정보</span>
+        
+            <span class="map_info">찾아오는 길</span>
+
+        <div>
+            <div id="map" style="width:500px;height:300px;"></div>
+                <script type="text/javascript" src="http://dapi.kakao.com/v2/maps/sdk.js?appkey=72bbc03a6cd9cefbbb0ea1b17067912a&libraries=services"></script>
+                    <script>
+                    var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+                        mapOption = {
+                            center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+                            level: 3 // 지도의 확대 레벨
+                        };  
+
+                    // 지도를 생성합니다    
+                    var map = new kakao.maps.Map(mapContainer, mapOption); 
+
+                    // 주소-좌표 변환 객체를 생성합니다
+                    var geocoder = new kakao.maps.services.Geocoder();
+
+                    // 주소로 좌표를 검색합니다
+                    geocoder.addressSearch('{{juso}}', function(result, status) {
+
+                        // 정상적으로 검색이 완료됐으면 
+                        if (status === kakao.maps.services.Status.OK) {
+
+                            var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+
+                            // 결과값으로 받은 위치를 마커로 표시합니다
+                            var marker = new kakao.maps.Marker({
+                                map: map,
+                                position: coords
+                            });
+
+                            // 인포윈도우로 장소에 대한 설명을 표시합니다
+                            var infowindow = new kakao.maps.InfoWindow({
+                                content: '<div style="width:150px;text-align:center;padding:6px 0;">문화재</div>'
+                            });
+                            infowindow.open(map, marker);
+
+                            // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+                            map.setCenter(coords);
+                        } 
+                    });    
+                    </script>
+        </div>
+        <div id="name">
+            <h1> {{result}}</h1>
+        </div>
+        <div id="place_info">
+            <h1>{{info}}</h1>
+        </div>
+        <a href="/">재실행</a>
+        
+            <div class = "footer">
+                <div class = "team name">
+                    TEAM 양동이
+                </div>
+    
+                <div class = "member">
+                    <p>이승민 안규용 이명재 이철승 조성근</p>
+                </div>
+            </div>   
+        </div>
+
+    </body>
+</html>

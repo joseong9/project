@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="ko">
+    <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>문화재</title>
+    <style>
+        @font-face {
+            font-family: "Gugi-Regular.woff";
+            src: url("../static/fonts/Gugi-Regular.woff") format("woff");
+        }
+        body {
+            margin: 0px;
+            font-family: "Gugi-Regular.woff";
+        }
+        .bg{
+            position: relative;
+            overflow: hidden;
+            margin: 0px auto; 
+        }
+        video {
+            width: 100%;
+            position: relative;
+            z-index: -1;
+            object-fit: cover;
+        }
+        .bg-text { 
+            position: absolute;
+            top: 7%; 
+            width: 50%; 
+            color: #ffffff;
+            letter-spacing: 5px;
+        }
+        .bg-text p {
+            text-align: left; 
+            font-size: 65px;
+            width: 100%;
+            margin: 0 auto;
+        }
+        .footer {
+            position: absolute;
+            font-size: 17px;
+            color: white;
+            text-align: left;
+            top: 30%;
+            margin-left: 2%;
+            width: 22%;
+            border-radius: 20px;
+        }
+
+        /* 버튼 */
+        #btn {
+            position: absolute;
+            top: 11%;
+            left: 90%;
+            width: 15%;
+            transform: translate(-50%, -70%);
+            text-align: center;
+            padding: 0 auto;
+        }   
+        #btn .icon {
+            background: black;
+            color: white;
+            width: 100%;
+            height: 90px;
+            font-family: "Gugi-Regular.woff";
+            font-size: 70px;
+            border-radius: 20px;
+            cursor: pointer;            
+        }   
+        #btn .icon:hover{
+            background: black;
+            color: #03e9f4;
+            box-shadow: 0 0 5px #03e9f4,
+                        0 0 25px #03e9f4,
+                        0 0 50px #03e9f4,
+                        0 0 200px #03e9f4;
+            -webkit-box-reflect:below 1px linear-gradient(transparent, #0005);
+        }
+
+        /* 모달 */           
+        #modal.modal-overlay {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            left: 0%;
+            top: 0%;
+            display: none;
+            flex-direction: fill;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.18);
+        }
+        #modal .modal-window {
+            background: rgba(0, 0, 0, 0.8);
+            box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.4);
+            border-radius: 10px;
+            border: 1px solid rgba( 255, 255, 255, 0.2);
+            width: 900px;
+            height: 500px;
+            margin: 0 auto;
+            margin-top: 270px;
+            position: relative;
+            animation: fadein 0.5s;
+        }
+        #modal .content {
+            position: absolute;
+            top:50px;
+            width:100%;
+            text-shadow: 1px 1px 2px gray;
+            color: white;
+            text-align: center;
+            font-size: 50px;
+            font-family: "Gugi-Regular.woff";
+        }
+
+        /* 닫기버튼 */
+        #modal .close {
+            float: right;
+            padding-right: 10px;
+            position: absolute;
+            top:50px;
+            right: 20px;
+            cursor: pointer;
+            color: white;
+            font-size: 20px;
+            margin-top: 15px;
+            margin-right: 10px;
+            z-index:9;
+        }
+        #modal .close:hover {
+            color:#03e9f4
+        }
+        .modal-window:hover {
+            background: black !important;
+            animation: fadein 0.03s;
+        }
+
+        /* 파일 업로드 */
+        #file {
+            position: relative;
+            top: 250px;
+            color: white;
+            width: 60%;
+            height: 100px;
+            text-align: center;
+            margin: 0 auto;
+        }
+        /* 파일선택창 */
+        .ipt{
+            font-size: 22px;
+            cursor: pointer;
+            width: 70%;
+        }
+        .ipt:hover{
+            color:#03e9f4
+        }
+        /* 실행버튼 */
+        .otp{
+            font-size: 22px;
+            cursor: pointer;
+            width: 22%;
+        }
+        .otp:hover{
+            color:#03e9f4
+        }
+
+        @keyframes 
+        fadein {from{opacity: 0;} to{opacity: 0.8;}}
+        </style>
+    </head>
+
+
+    <body>
+        <div class="bg"> 
+            <video muted autoplay loop>
+                <source src="../static/seoul.mp4" type="video/mp4">
+            </video>
+            <div class="bg-text">
+                <p>여행을 위한</p>
+                <p>최적의 장소</p>
+            </div>
+
+            <div id="btn">
+                <button class="icon">></button>
+            </div>
+
+            <div class="footer"> 
+                <div class="team name">TEAM 양동이</div>
+                <div class="member"><p>이승민 안규용 이명재 이철승 조성근</p></div>
+            </div>
+        </div>
+
+
+        <div id="modal" class="modal-overlay">
+            <div class="modal-window">
+                <form id="file" action="/upload" method = 'POST' enctype="multipart/form-data">
+                    <input class="ipt" type="file" name="file">
+                    <button class= "otp" type="submit"> 실행 </button>
+                </form>
+                <span class="close">X</span>  
+                <div class="content">
+                    <p>눌러서 업로드하세요!</p>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            var modal = document.getElementById("modal");
+            var btn = document.getElementById("btn");
+            var span = document.getElementsByClassName("close")[0];
+            
+            // 모달창 열기 
+            btn.onclick = function() {
+              modal.style.display = "block";
+            }
+            // 모달창 닫기
+            span.onclick = function() {
+              modal.style.display = "none";
+            }
+        </script>
+    </body>
+</html>

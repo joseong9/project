@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script src="https://kit.fontawesome.com/c3d5e18002.js" crossorigin="anonymous"></script>
+        <title>결과화면</title>
+        <style>
+            @font-face {
+                font-family: "Gugi-Regular.woff";
+                src: url("../static/fonts/Gugi-Regular.woff") format("woff");
+            }
+            body, html {
+                height: 150%;
+                margin: 0;
+                /* font-family: "Gugi-Regular.woff"; */
+                font-family: Noto Serif Hong Kong;
+            }
+            .bg{
+                height: 100%;
+                background: #D5D5CD;
+                background-position: center;
+                background-repeat: no-repeat;
+                background-size: cover;
+            }
+            .border{
+                background: #000000;
+                background: -webkit-linear-gradient(to right, #000000, #434343);
+                background: linear-gradient(to right, #000000, #434343);
+                text-align: center;
+                position: relative;
+                font-size: 70px;
+                font-weight: bold;
+                word-spacing: 10px;
+                line-height: 180px;
+                color: #D5D5CD;
+                height: 20%;
+                width: 100%;
+                backdrop-filter: 10px;
+            }
+            .btn{
+                font-size: 35px;
+                letter-spacing: 10px;
+                position: absolute;
+                top: 20%;
+                left: 41%;
+                margin: 0 auto;
+                width: 17%;
+                height: 7%;
+                color: #D5D5CD;
+                border: 3px solid #D5D5CD;
+                border-radius: 40px;
+                text-align: center;
+                line-height: 2em;
+                cursor: pointer;
+                background: black;    
+            }
+            .btn:hover{
+                background: black;
+                color: white;
+                box-shadow: 0 0 5px rgba(128, 128, 128, 0.351),
+                            0 0 25px rgba(128, 128, 128, 0.351),
+                            0 0 50px rgba(128, 128, 128, 0.351),
+                            0 0 200px rgba(128, 128, 128, 0.351);
+                -webkit-box-reflect:below 1px linear-gradient(transparent, #0005);
+            }
+            .btn_res{ 
+                font-size: 23px;
+                float: center;
+                position: relative;
+                width: 25%;
+                color: white;
+                border: 3px solid white;
+                border-radius: 40px;
+                text-align: center;
+                line-height: 2em;
+                cursor: pointer;
+                background: black;
+            }
+            .btn_res:hover{
+                background: black;
+                color: white;
+                box-shadow: 0 0 5px rgba(128, 128, 128, 0.351),
+                            0 0 25px rgba(128, 128, 128, 0.351),
+                            0 0 50px rgba(128, 128, 128, 0.351),
+                            0 0 200px rgba(128, 128, 128, 0.351);
+                -webkit-box-reflect:below 1px linear-gradient(transparent, #0005);
+            }
+            .btn_ho{
+                font-size: 23px;
+                float: center;
+                position: relative;
+                width: 25%;
+                color: white;
+                border: 3px solid white;
+                border-radius: 40px;
+                text-align: center;
+                line-height: 2em;
+                cursor: pointer;
+                background: black;
+            }
+            .btn_ho:hover{
+                background: black;
+                color: white;
+                box-shadow: 0 0 5px rgba(128, 128, 128, 0.351),
+                            0 0 25px rgba(128, 128, 128, 0.351),
+                            0 0 50px rgba(128, 128, 128, 0.351),
+                            0 0 200px rgba(128, 128, 128, 0.351);
+                -webkit-box-reflect:below 1px linear-gradient(transparent, #0005);
+            }
+            div.left{
+                top: 10%;
+                float: left;
+                color: black;
+                width: 50%;
+                font-size: 40px;
+                text-align: center;
+            }
+            .left p{
+                font-size: 40px;
+            }
+
+            div.right{
+                top: 10%;
+                float: right;
+                color: black;
+                width: 50%;
+                font-size: 40px;
+                text-align: center;
+            }
+            div.name{
+                font-size: 30px;
+                color: black;
+                margin-top: 5%;
+            }
+            div.place_info{
+                font-size: 30px;
+                color: black;
+            }
+            /* 공유하기 */
+            .middle {
+                margin:0;
+                padding:0;
+                position: absolute;
+                width: 100%;
+                top: 33%;
+                text-align: center;
+            }
+            .icon {
+                display:inline-block;
+                width:60px;
+                height: 60px;
+                background: #f1f1f1;
+                margin: 10px;
+                border-radius: 30%;
+                box-shadow:-5px 5px 15px -5px #f1f1f1; 
+                overflow: hidden;
+                position: relative;
+                transition: 0.3s linear;
+            }
+  
+            .icon i {
+                line-height: 60px;
+                font-size: 26px;
+                transition: 0.3s linear;
+            }
+            .icon:nth-child(1) i {color:#3b5998;}
+            .icon:nth-child(2) i {color:#1da1f2;}
+            .icon:nth-child(3) i {color:#c32aa3;}
+            .icon:nth-child(4) i {color:#db4437;}
+
+            .icon:hover {
+              transform: scale(1.1);
+            }
+            .icon:hover i {
+              transform: scale(1.2);
+              color: #fff;
+            }
+            .icon:before {
+              content:"";
+              position:absolute;
+              width:120%;
+              height:120%;
+              transform: rotate(45deg);
+              left: -110%;
+              top:90%;
+            }
+            .icon:nth-child(1)::before {background: #3b5998;}
+            .icon:nth-child(2)::before {background: #1da1f2;}
+            .icon:nth-child(3)::before {background: #c32aa3;}
+            .icon:nth-child(4)::before {background: #db4437;}
+            .icon:hover::before {
+              animation: aaa 0.7s 1;
+              top: -10%;
+              left: -10%;
+            }
+            @keyframes aaa {
+              0% {left: -110%; top:90%;}
+              50% {left:10%; top: -30%;}
+              100% {left: -10%; top: -10%;}
+            }
+        </style>
+    </head>
+
+    <body>
+        <div class="bg">
+            <div class="border">여행을 위한 최적의 장소</div>
+                <div class="btn">
+                    <span OnClick="location.href='http://127.0.0.1:5000/'">재실행</span>
+                    <div class="dot"></div>
+                </div>
+            <!-- 하단왼쪽 -->
+            <div class="left">
+                <p>문화재 정보</p>
+                <div class="name1">
+                    <img src="{{url_for('static', filename='upload/'+fname +'.jpg', q=mtime)}}"  alt="{{url_for('static', filename='upload/'+fname +'.jpg', q=mtime)}}" >
+                </div>
+                <div class="name" style="font-size: 30px; font-family: Noto Serif Hong Kong;">{{result}}</div>
+                <div class="place_info" style="font-size: 30px; font-family: Noto Serif Hong Kong;">{{info}}</div>
+                <button class="btn_res" type="button" onclick="location.href='{{res}}'">근처 맛집 추천</button>
+                <button class="btn_ho" type="button" onclick="location.href='{{hotel}}'">근처 숙박 업소</button>
+            </div>
+            <!-- 하단오른쪽 -->
+            <div class="right">
+                <p style="margin-bottom: 40px;">찾아오는 길</p>
+                <center>
+                    <div id="map" style="width:550px;height:500px;"></div>
+                        <script type="text/javascript" src="http://dapi.kakao.com/v2/maps/sdk.js?appkey=72bbc03a6cd9cefbbb0ea1b17067912a&libraries=services"></script>
+                            <script>
+                            var mapContainer = document.getElementById('map'), // 지도를 표시할 div
+                                mapOption = {
+                                    center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+                                    level: 3 // 지도의 확대 레벨
+                                };
+                            // 지도를 생성합니다
+                            var map = new kakao.maps.Map(mapContainer, mapOption);
+                            // 주소-좌표 변환 객체를 생성합니다
+                            var geocoder = new kakao.maps.services.Geocoder();
+                            // 주소로 좌표를 검색합니다
+                            geocoder.addressSearch('{{juso}}', function(result, status) {
+                                // 정상적으로 검색이 완료됐으면
+                                if (status === kakao.maps.services.Status.OK) {
+                                    var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+                                    // 결과값으로 받은 위치를 마커로 표시합니다
+                                    var marker = new kakao.maps.Marker({
+                                        map: map,
+                                        position: coords
+                                    });
+                                    // 인포윈도우로 장소에 대한 설명을 표시합니다
+                                    var infowindow = new kakao.maps.InfoWindow({
+                                        content: '<div style="width:150px; text-align:center; padding:6px; 0; color:black; font-size:15px">{{juso}}</div>'
+                                    });
+                                    infowindow.open(map, marker);
+                                    // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+                                    map.setCenter(coords);
+                                }
+                            });
+                            </script>
+                    </div>
+                </div>
+                </center>
+            </div>
+            <!-- 공유하기 -->
+            <div class="middle">
+                <a class="icon" href="javascript:shareFacebook();">
+                  <i class="fa fa-facebook-f"></i>
+                </a>
+                <a class="icon" href="javascript:shareTwitter();">
+                  <i class="fa fa-twitter"></i>
+                </a>
+                <a class="icon" href="https://www.instagram.com/">
+                  <i class="fa fa-instagram"></i>
+                </a>
+                <a class="icon" href="https://www.google.com/">
+                  <i class="fa fa-google-plus"></i>
+                </a>
+              </div>
+        </div>
+        <script>
+            function shareTwitter() {
+                var sendText = "여행에 최적의 장소"; // 전달할 텍스트
+                var sendUrl = "127.0.0.1:5000"; // 전달할 URL
+                window.open("https://twitter.com/intent/tweet?text=" + sendText + "&url=" + sendUrl);
+            }
+            function shareFacebook() {
+                var sendUrl = "127.0.0.1:5000"; // 전달할 URL
+                window.open("http://www.facebook.com/sharer/sharer.php?u=" + sendUrl);
+            }
+
+        </script>
+    </body>
+</html>
